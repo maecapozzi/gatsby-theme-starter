@@ -1,13 +1,22 @@
 const fs = require("fs");
-
+const path = require("path");
 // 1. Make sure the pages directory exists
 
-exports.onPreBootstrap = ({ reporter }, options) => {
+exports.onPreBootstrap = ({ reporter, store }, options) => {
+  const { program } = store.getState();
+
   const contentPath = options.contentPath || "data";
+  const imagesPath = options.imagesPath || "images";
+  const dir = path.join(program.directory, imagesPath);
 
   if (!fs.existsSync(contentPath)) {
     reporter.info(`creating the ${contentPath} directory`);
     fs.mkdirSync(contentPath);
+  }
+
+  if (!fs.existsSync(dir)) {
+    reporter.info(`creating the ${dir} directory`);
+    fs.mkdirSync(dir);
   }
 };
 
@@ -81,7 +90,7 @@ exports.createPages = async ({ actions, graphql, reporter }, options) => {
   staticPages.forEach(staticPage => {
     actions.createPage({
       path: staticPage.node.slug,
-      component: require.resolve("./src/templates/staticPage.js"),
+      component: require.resolve("./src/templates/aboutMe.js"),
       context: {
         pageId: staticPage.node.id
       }

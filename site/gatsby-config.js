@@ -4,7 +4,8 @@ module.exports = {
       resolve: "gatsby-theme-about-me",
       options: {
         contentPath: "data",
-        basePath: "/"
+        basePath: "/",
+        imagesPath: "images"
       }
     }
   ]

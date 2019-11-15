@@ -1,11 +1,12 @@
 {
   "id": "1",
-  "name": "About",
+  "name": "About Me",
+  "pathToImage": "../images/profile-pic.jpg",
   "sections": [
     {
       "id": "1",
       "header": "CONSENT",
-      "description": "Description"
+      "description": "Hi, I'm Mae! I'm a web developer and I love coding. That's why I'm doing this project in the first place!"
     }
   ]
 }

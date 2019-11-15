@@ -1,4 +1,8 @@
-module.exports = ({ contentPath = "static-pages", basePath = "/" }) => ({
+module.exports = ({
+  contentPath = "data",
+  imagesPath = "images",
+  basePath = "/"
+}) => ({
   plugins: [
     {
       resolve: `gatsby-transformer-json`,
@@ -12,6 +16,15 @@ module.exports = ({ contentPath = "static-pages", basePath = "/" }) => ({
         name: `data`,
         path: contentPath
       }
-    }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `data`,
+        path: imagesPath
+      }
+    },
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-sharp"
   ]
 });
