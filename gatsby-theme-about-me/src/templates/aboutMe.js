@@ -1,14 +1,17 @@
 import React from "react";
-import { graphql } from "gatsby";
 import AboutMe from "../components/AboutMe";
 
 export const query = graphql`
   query($pageId: String!) {
     staticPage(id: { eq: $pageId }) {
       name
+      bio
       sections {
         id
-        description
+        links {
+          name
+          link
+        }
         header
       }
       id
@@ -40,8 +43,8 @@ const AboutMeTemplate = ({ data }) => {
     image = img;
   });
 
-  const { name, sections } = data.staticPage;
-  return <AboutMe name={name} sections={sections} img={image} />;
+  const { name, sections, bio } = data.staticPage;
+  return <AboutMe name={name} sections={sections} bio={bio} img={image} />;
 };
 
 export default AboutMeTemplate;

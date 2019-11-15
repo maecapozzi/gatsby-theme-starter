@@ -1,12 +1,37 @@
 {
   "id": "1",
   "name": "About Me",
-  "pathToImage": "../images/profile-pic.jpg",
+  "bio": "Hi, I'm Mae! I really like coding, so I'm working on this project. I find it kind of interesting.",
   "sections": [
     {
       "id": "1",
-      "header": "CONSENT",
-      "description": "Hi, I'm Mae! I'm a web developer and I love coding. That's why I'm doing this project in the first place!"
+      "header": "Find me on the internet",
+      "links": [
+        {
+          "name": "Github",
+          "link": "https://github.com/maecapozzi/"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "header": "My projects",
+      "links": [
+        {
+          "name": "This Theme",
+          "link": "https://github.com/maecapozzi/"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "header": "Free time",
+      "links": [
+        {
+          "name": "Github",
+          "link": "https://github.com/maecapozzi/"
+        }
+      ]
     }
   ]
 }

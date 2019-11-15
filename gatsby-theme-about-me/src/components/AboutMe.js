@@ -3,7 +3,7 @@ import { graphql } from "gatsby";
 import styled from "styled-components";
 import Img from "gatsby-image";
 
-const Section = styled.section`
+const Grid = styled.section`
   display: grid;
   width: 100vw;
   height: 100vh;
@@ -12,56 +12,45 @@ const Section = styled.section`
   grid-row-gap: 10px;
 `;
 
-const Div = styled.div`
+const Column = styled.div`
   background: gray;
 `;
 
-const AboutMe = ({ data, sections, name, img }) => {
+const Links = ({ links }) => (
+  <ul>
+    {links.map(link => {
+      return (
+        <li>
+          <a href={link.link}>
+            <p>{link.name}</p>
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+);
+
+const AboutMe = ({ data, sections, bio, name, img }) => {
   return (
     <>
-      {sections.map(section => {
-        return (
-          <Section>
-            <Div>
-              <h1>{name}</h1>
-              <Img fluid={img.node.childImageSharp.fluid}></Img>
-              <h3>Find me on the internet</h3>
-              <ul>
-                <li>
-                  <a href="https://github.com/maecapozzi">
-                    <p>Github</p>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://github.com/maecapozzi">
-                    <p>Twitter</p>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://github.com/maecapozzi">
-                    <p>LinkedIn</p>
-                  </a>
-                </li>
-                <h3>My projects</h3>
-                <li>
-                  <p>This Gatsby theme</p>
-                </li>
-              </ul>
-              <h3>Work</h3>
-              <ul>
-                <li>501 Auctions</li>
-                <li>Thrive Global</li>
-                <li>InRhythm</li>
-                <li>Harry's</li>
-              </ul>
-            </Div>
-            <Div>
-              <h1>Bio</h1>
-              <p>{section.description}</p>
-            </Div>
-          </Section>
-        );
-      })}
+      <Grid>
+        <Column>
+          <h1>{name}</h1>
+          <Img fluid={img.node.childImageSharp.fluid}></Img>
+          {sections.map(section => {
+            return (
+              <>
+                <h3>{section.header}</h3>
+                <Links links={section.links} />
+              </>
+            );
+          })}
+        </Column>
+        <Column>
+          <h1>Bio</h1>
+          <p>{bio}</p>
+        </Column>
+      </Grid>
     </>
   );
 };

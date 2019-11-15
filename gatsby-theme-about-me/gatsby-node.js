@@ -20,13 +20,18 @@ exports.onPreBootstrap = ({ reporter, store }, options) => {
   }
 };
 
-// 2. Define the page type
+// 2. Define the pa ge type
 exports.sourceNodes = ({ actions }) => {
   actions.createTypes(`
+    type Link {
+      name: String!
+      link: String
+    }
+
     type Section {
       id: String!
       header: String
-      description: String
+      links: [Link!]
     }
   `);
 
@@ -34,6 +39,7 @@ exports.sourceNodes = ({ actions }) => {
     type StaticPage implements Node @dontInfer {
       id: ID!
       name: String!
+      bio: String!
       sections: [Section!]!
       slug: String!
     }`);
@@ -70,9 +76,13 @@ exports.createPages = async ({ actions, graphql, reporter }, options) => {
           node {
             id
             name
+            bio
             sections {
               header
-              description
+              links {
+                name
+                link
+              }
             }
             slug
           }
