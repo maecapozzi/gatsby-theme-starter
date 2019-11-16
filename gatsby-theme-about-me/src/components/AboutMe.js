@@ -2,17 +2,75 @@ import React from "react";
 import styled from "styled-components";
 import Img from "gatsby-image";
 
-const Grid = styled.section`
-  display: grid;
-  width: 100vw;
+const Page = styled.section`
+  background: #f7f7ff;
   height: 100vh;
-  grid-template-columns: repeat(1, 1fr) repeat(1, 2fr);
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
 `;
 
-const Column = styled.div`
-  background: gray;
+const Grid = styled.section`
+  display: grid;
+  height: 100vh;
+  grid-template-areas:
+    "nav nav nav nav"
+    "asideLeft main main main"
+    "footer footer footer footer";
+  grid-template-rows: 40px auto 80px;
+  grid-template-columns: 4fr 4fr 4fr;
+`;
+
+const StyledImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+const StyledImage = styled(Img)`
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+`;
+
+const Nav = styled.nav`
+  color: #f7f7ff;
+  grid-area: nav;
+  border-bottom: 5px solid #577399;
+`;
+
+const AsideLeft = styled.aside`
+  background: #f7f7ff;
+  align-items: center;
+  color: #577399;
+  padding: 20px;
+  grid-area: asideLeft;
+  padding-top: 200px;
+`;
+
+const Main = styled.main`
+  background: #577399;
+  margin: 0 0 0 20px;
+  padding: 20px;
+  color: #f7f7ff;
+  grid-area: main;
+`;
+const Footer = styled.footer`
+  color: #f7f7ff;
+  grid-area: footer;
+  border-top: 5px solid #577399;
+`;
+
+const StyledLink = styled.a`
+  color: #fe5f55;
+  font-size: 14px;
+`;
+
+const Text = styled.p`
+  font-size: 16px;
+`;
+
+const Bio = styled.div`
+  margin: 40px 0;
+`;
+
+const LinksSection = styled.div`
+  margin: 0 20px;
 `;
 
 const Links = ({ links }) => (
@@ -20,9 +78,9 @@ const Links = ({ links }) => (
     {links.map(link => {
       return (
         <li>
-          <a href={link.link}>
+          <StyledLink href={link.link}>
             <p>{link.name}</p>
-          </a>
+          </StyledLink>
         </li>
       );
     })}
@@ -31,26 +89,33 @@ const Links = ({ links }) => (
 
 const AboutMe = ({ data, sections, bio, name, img }) => {
   return (
-    <>
+    <Page>
       <Grid>
-        <Column>
-          <h1>{name}</h1>
-          <Img fluid={img.node.childImageSharp.fluid}></Img>
-          {sections.map(section => {
-            return (
-              <>
-                <h3>{section.header}</h3>
-                <Links links={section.links} />
-              </>
-            );
-          })}
-        </Column>
-        <Column>
-          <h1>Bio</h1>
-          <p>{bio}</p>
-        </Column>
+        <Nav />
+        <AsideLeft>
+          <StyledImageWrapper>
+            <StyledImage fluid={img.node.childImageSharp.fluid}></StyledImage>
+          </StyledImageWrapper>
+          <Bio>
+            <h2>Bio</h2>
+            <Text>{bio}</Text>
+          </Bio>
+        </AsideLeft>
+        <Main>
+          <LinksSection>
+            {sections.map(section => {
+              return (
+                <>
+                  <h3>{section.header}</h3>
+                  <Links links={section.links} />
+                </>
+              );
+            })}
+          </LinksSection>
+        </Main>
+        <Footer />
       </Grid>
-    </>
+    </Page>
   );
 };
 
