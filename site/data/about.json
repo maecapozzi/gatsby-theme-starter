@@ -25,12 +25,18 @@
     },
     {
       "id": "3",
-      "header": "Free time",
+      "header": "Work",
       "links": [
         {
-          "name": "Github",
-          "link": "https://github.com/maecapozzi/"
-        }
+          "name": "501 Auctions"
+        },
+        {
+          "name": "Thrive Global"
+        },
+        {
+          "name": "InRhythm"
+        },
+        { "name": "Harry's" }
       ]
     }
   ]
