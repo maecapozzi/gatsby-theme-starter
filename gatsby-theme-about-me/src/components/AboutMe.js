@@ -8,14 +8,13 @@ const Page = styled.section`
 `;
 
 const Grid = styled.section`
-  display: grid;
-  height: 100vh;
-  grid-template-areas:
-    "nav nav nav nav"
-    "asideLeft main main main"
-    "footer footer footer footer";
-  grid-template-rows: 40px auto 80px;
-  grid-template-columns: 4fr 4fr 4fr;
+  @media (min-width: 768px) {
+    display: grid;
+    height: 100vh;
+    grid-template-areas: "asideLeft main main main";
+    grid-template-rows: auto;
+    grid-template-columns: 4fr 4fr 4fr;
+  }
 `;
 
 const StyledImageWrapper = styled.div`
@@ -28,32 +27,28 @@ const StyledImage = styled(Img)`
   width: 200px;
 `;
 
-const Nav = styled.nav`
-  color: #f7f7ff;
-  grid-area: nav;
-  border-bottom: 5px solid #577399;
-`;
-
 const AsideLeft = styled.aside`
-  background: #f7f7ff;
+  background: #577399;
   align-items: center;
-  color: #577399;
-  padding: 20px;
+  color: #f7f7ff;
+  padding: 20px 100px;
+  text-align: center;
   grid-area: asideLeft;
-  padding-top: 200px;
+  @media (min-width: 768px) {
+    padding-top: 200px;
+    text-align: left;
+  }
 `;
 
 const Main = styled.main`
-  background: #577399;
-  margin: 0 0 0 20px;
-  padding: 20px;
-  color: #f7f7ff;
+  background: #f7f7ff;
+  color: #577399;
   grid-area: main;
-`;
-const Footer = styled.footer`
-  color: #f7f7ff;
-  grid-area: footer;
-  border-top: 5px solid #577399;
+  padding: 50px;
+  @media (min-width: 768px) {
+    padding: 230px 20px;
+    margin: 0 0 0 20px;
+  }
 `;
 
 const StyledLink = styled.a`
@@ -70,7 +65,9 @@ const Bio = styled.div`
 `;
 
 const LinksSection = styled.div`
-  margin: 0 20px;
+  @media (min-width: 768px) {
+    margin: 0 20px;
+  }
 `;
 
 const Links = ({ links }) => (
@@ -91,7 +88,6 @@ const AboutMe = ({ data, sections, bio, name, img }) => {
   return (
     <Page>
       <Grid>
-        <Nav />
         <AsideLeft>
           <StyledImageWrapper>
             <StyledImage fluid={img.node.childImageSharp.fluid}></StyledImage>
@@ -113,7 +109,6 @@ const AboutMe = ({ data, sections, bio, name, img }) => {
             })}
           </LinksSection>
         </Main>
-        <Footer />
       </Grid>
     </Page>
   );
