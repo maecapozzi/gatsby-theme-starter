@@ -2,6 +2,8 @@
   "private": true,
   "workspaces": [
     "gatsby-theme-about-me",
-    "site"
+    "site",
+    "mae-capozzi-blog",
+    "gatsby-starter-blog"
   ]
 }
