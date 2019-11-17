@@ -31,11 +31,11 @@ const AsideLeft = styled.aside`
   background: #577399;
   align-items: center;
   color: #f7f7ff;
-  padding: 20px 100px;
+  padding: 20px;
   text-align: center;
   grid-area: asideLeft;
   @media (min-width: 768px) {
-    padding-top: 200px;
+    padding: 0px 200px;
     text-align: left;
   }
 `;
@@ -60,8 +60,14 @@ const Text = styled.p`
   font-size: 16px;
 `;
 
+const ContentWrapper = styled.div`
+  @media (min-width: 768px) {
+    margin-top: 25vh;
+  }
+`;
+
 const Bio = styled.div`
-  margin: 40px 0;
+  margin-top: 40px;
 `;
 
 const LinksSection = styled.div`
@@ -89,13 +95,14 @@ const AboutMe = ({ data, sections, bio, name, img }) => {
     <Page>
       <Grid>
         <AsideLeft>
-          <StyledImageWrapper>
-            <StyledImage fluid={img.node.childImageSharp.fluid}></StyledImage>
-          </StyledImageWrapper>
-          <Bio>
-            <h2>Bio</h2>
-            <Text>{bio}</Text>
-          </Bio>
+          <ContentWrapper>
+            <StyledImageWrapper>
+              <StyledImage fluid={img.node.childImageSharp.fluid}></StyledImage>
+            </StyledImageWrapper>
+            <Bio>
+              <Text>{bio}</Text>
+            </Bio>
+          </ContentWrapper>
         </AsideLeft>
         <Main>
           <LinksSection>
