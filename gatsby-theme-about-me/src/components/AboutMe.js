@@ -1,111 +1,105 @@
-import React from "react";
-import styled from "styled-components";
+/** @jsx jsx */
+import React from "react"; // eslint-disable-line no-unused-vars
 import Img from "gatsby-image";
-
-const Page = styled.section`
-  background: #f7f7ff;
-  height: 100vh;
-`;
-
-const Grid = styled.section`
-  @media (min-width: 768px) {
-    display: grid;
-    height: 100vh;
-    grid-template-areas: "asideLeft main main main";
-    grid-template-rows: auto;
-    grid-template-columns: 4fr 4fr 4fr;
-  }
-`;
-
-const StyledImageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-const StyledImage = styled(Img)`
-  border-radius: 50%;
-  height: 200px;
-  width: 200px;
-`;
-
-const AsideLeft = styled.aside`
-  background: #577399;
-  align-items: center;
-  color: #f7f7ff;
-  padding: 20px;
-  text-align: center;
-  grid-area: asideLeft;
-  @media (min-width: 768px) {
-    padding: 0px 200px;
-    text-align: left;
-  }
-`;
-
-const Main = styled.main`
-  background: #f7f7ff;
-  color: #577399;
-  grid-area: main;
-  padding: 50px;
-  @media (min-width: 768px) {
-    padding: 230px 20px;
-    margin: 0 0 0 20px;
-  }
-`;
-
-const StyledLink = styled.a`
-  color: #fe5f55;
-  font-size: 14px;
-`;
-
-const Text = styled.p`
-  font-size: 16px;
-`;
-
-const ContentWrapper = styled.div`
-  @media (min-width: 768px) {
-    margin-top: 25vh;
-  }
-`;
-
-const Bio = styled.div`
-  margin-top: 40px;
-`;
-
-const LinksSection = styled.div`
-  @media (min-width: 768px) {
-    margin: 0 20px;
-  }
-`;
+import { jsx } from "theme-ui";
+import theme from "../gatsby-plugin-theme-ui/theme";
 
 const Links = ({ links }) => (
   <ul>
     {links.map(link => {
       return (
         <li>
-          <StyledLink href={link.link}>
+          <a
+            sx={{
+              color: `${theme.colors.tertiary}`,
+              fontSize: `14px`
+            }}
+            href={link.link}
+          >
             <p>{link.name}</p>
-          </StyledLink>
+          </a>
         </li>
       );
     })}
   </ul>
 );
 
-const AboutMe = ({ data, sections, bio, name, img }) => {
+const AboutMe = ({ sections, bio, img }) => {
   return (
-    <Page>
-      <Grid>
-        <AsideLeft>
-          <ContentWrapper>
-            <StyledImageWrapper>
-              <StyledImage fluid={img.node.childImageSharp.fluid}></StyledImage>
-            </StyledImageWrapper>
-            <Bio>
-              <Text>{bio}</Text>
-            </Bio>
-          </ContentWrapper>
-        </AsideLeft>
-        <Main>
-          <LinksSection>
+    <div
+      sx={{
+        background: `${theme.colors.primary}`
+      }}
+    >
+      <div
+        sx={{
+          display: [`block`, `grid`],
+          height: `100vh`,
+          gridTemplateAreas: [``, `'asideLeft main'`],
+          gridTemplateRows: [``, `auto`],
+          gridTemplateColumns: [``, `2fr 10fr`]
+        }}
+      >
+        <div
+          sx={{
+            background: `${theme.colors.secondary}`,
+            alignItems: `center`,
+            color: `${theme.colors.primary}`,
+            gridArea: `asideLeft`,
+            padding: [`20px`, `0px 200px`],
+            textAlign: [`center`, `left`]
+          }}
+        >
+          <div
+            sx={{
+              marginTop: [``, `25vh`]
+            }}
+          >
+            <div
+              sx={{
+                display: "flex",
+                justifyContent: `center`
+              }}
+            >
+              <Img
+                sx={{
+                  borderRadius: `50%`,
+                  height: `200px`,
+                  width: `200px`
+                }}
+                fluid={img.node.childImageSharp.fluid}
+              ></Img>
+            </div>
+            <div
+              sx={{
+                marginTop: `40px`
+              }}
+            >
+              <p
+                sx={{
+                  fontSize: `16px`
+                }}
+              >
+                {bio}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          sx={{
+            background: `${theme.colors.primary}`,
+            color: `${theme.colors.secondary}`,
+            gridArea: `main`,
+            padding: [`50px`, `230px 20px`],
+            textAlign: [``, `left`],
+            minWidth: `200px`
+          }}
+        >
+          <div
+            sx={{
+              margin: [``, `0 20px`]
+            }}
+          >
             {sections.map(section => {
               return (
                 <>
@@ -114,10 +108,10 @@ const AboutMe = ({ data, sections, bio, name, img }) => {
                 </>
               );
             })}
-          </LinksSection>
-        </Main>
-      </Grid>
-    </Page>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
